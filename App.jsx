@@ -377,10 +377,10 @@ const api = {
   async getOrCreateUser(name, phone, role) {
     // Try find existing by name+phone
     const { data: existing } = await supabase
-      .from("users").select("*").eq("name", name).eq("phone", phone).maybeSingle();
+      .from("profiles").select("*").eq("name", name).eq("phone", phone).maybeSingle();
     if (existing) return existing;
     const { data, error } = await supabase
-      .from("users").insert({ name, phone, role }).select().single();
+      .from("profiles").insert({ name, phone, role }).select().single();
     if (error) throw error;
     return data;
   },
